@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NinetyNineCats</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body>
+    <% unless current_user.nil? %>
+
+    <input type="hidden"
+            name="authenticity_token"
+            value="<%= form_authenticity_token %>">
+
+    <header>
+      <h1>Current User: </h1>
+      <%= current_user.username %>
+        <!-- <button action="/session" type="button"  value="destroy">Log Out</button> -->
+        <%=button_to "Log Out", session_url, method: 'delete'  %>
+
+    <% else%>
+      <a href= "<%=new_session_url  %>"> Log in</a>
+      </header>
+    <% end  %>
+    <%= yield %>
+  </body>
+</html>
